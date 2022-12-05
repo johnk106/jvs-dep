@@ -1,0 +1,121 @@
+{%extends 'JVSafarisMain/base.html'%}
+
+
+{%block head%}
+<title>
+    JVS payment - {{booking.package.package_name}}
+</title>
+{%endblock%}
+
+{%block pagetitle%}
+{{booking.package.package_name}}
+{%endblock%}
+
+
+{%block subtitle%}
+{{booking.package.package_name}}
+{%endblock%}
+
+
+{%block body%}
+
+<div style="padding: 15px;margin:2% 2%;background-color: white;border: none;box-shadow:2px 4px 5px grey;">
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <h5>Service Summaray</h5>
+            <hr>
+            <div class="col-md-12">
+                <img width="100%" height="70%" src="{{booking.package.image.url}}" alt="">
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <h6>Service name:</h6>
+                </div>
+                <div class="col-md-5">
+                    {{booking.package.package_name}}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <h6>Customer name:</h6>
+                </div>
+                <div class="col-md-5">
+                    {{booking.fname}} {{booking.lname}}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <h6>No of Adults:</h6>
+                </div>
+                <div class="col-md-5">
+                    {{booking.adults}}
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-4">
+                    <h6>No of kids:</h6>
+                </div>
+                <div class="col-md-5">
+                    {{booking.kids}} 
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <h6>Tot:</h6>
+                </div>
+                <div class="col-md-5">
+                    Ksh 4000
+                </div>
+            </div>
+            
+
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <div class="row">
+                <div class="col-md-3">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/M-pesa-logo.png/640px-M-pesa-logo.png"
+                 alt="" width="70%" height="80%">
+                </div>
+                
+                <h5 class="col-md-4">Mpesa payment</h5>
+                <p style="color: black;font-size:16px;">Kindly enter your mpesa number to recieve the push notification and complete payment.Please ensure your mobile phone is turned on and unlocked</p>
+          
+            </div>
+
+            <form action="">
+                {%csrf_token%}
+
+                <div class="mb-3">
+                    <label for="mobile" class="form-label">Mobile Number</label>
+                    <input type="email" class="form-control" id="mobile">
+                  </div>
+                   
+                   <button style="background-color: green;border:none;border-radius:10px" class="btn btn-primary">Pay</button>
+            </form>
+
+            <p style="color: red;">*if you don't recieve a push notification you can follow this steps to complete payment.*</p>
+            <ol>
+                <li>Navigate to your mpesa menu</li>
+                <li>Select Lipa na mpesa option</li>
+                <li>select till number</li>
+                <li>enter <b>1234567</b> as the till number.</li>
+                <li>enter <b>4000</b> as the amount and send</li>
+            </ol>
+            <p style="color: black;">
+                Kindly  note if you used the manual payment method you will need to verify your payment via our verification system to recieve your tickets.You can do that by using the button below.
+            </p>
+            <a href=""><button class="btn btn-primary">Verify payment</button></a>
+
+            <p style="color:black;"><b>Note:</b>You can making payments at a later date after your booking by navigating to my accounts page ,under my bookings click on the booking of choice then click verify payment to come back to this page.</p>
+        </div>
+    </div>
+
+
+</div>
+
+
+{%endblock%}

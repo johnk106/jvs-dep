@@ -1,0 +1,246 @@
+{%extends 'JVSafarisMain/base.html'%}
+{%load static%}
+
+{%block head%}
+<title>Blogs - {{blog.heading}}</title>
+{%endblock%}
+
+{%block pagetitle%}
+{{blog.heading}}
+{%endblock%}
+
+{%block subtitle%}
+{{blog.heading}}
+{%endblock%}
+
+{%block body%}
+<!-- Blog Start -->
+<div class="container-fluid py-5">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-lg-8">
+                <!-- Blog Detail Start -->
+                <div class="pb-3">
+                    <div class="blog-item">
+                        <div class="position-relative">
+                            <img class="img-fluid w-100" src="{{blog.image.url}}" alt="">
+                            <div class="blog-date">
+                                <h6 class="font-weight-bold mb-n1">01</h6>
+                                <small class="text-white text-uppercase">Jan</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white mb-3" style="padding: 30px;">
+                        <div class="d-flex mb-3">
+                          
+                            <a class="text-primary text-uppercase text-decoration-none" href="">{{blog.category}}</a>
+                        </div>
+                        <h2 class="mb-3">{{blog.heading}}</h2>
+                        {%for subheading in blog.subheading_set.all%}
+              
+                        <h4 class="mb-3">{{subheading.sub_heading}}</h4>
+                        <img class="img-fluid w-50 float-left mr-4 mb-2" src="{{subheading.image.url}}">
+
+                        {%for paragraph in subheading.paragraph_set.all%}
+                        <p>{{paragraph.content}}</p>
+                        {%endfor%}
+                       
+
+                            {%endfor%}
+                    </div>
+                </div>
+                <!-- Blog Detail End -->
+
+                <!-- Comment List Start -->
+                <div class="bg-white" style="padding: 30px; margin-bottom: 30px;">
+                    <h4 class="text-uppercase mb-4" style="letter-spacing: 5px;">{{blog.blogcomment_set.count}} Comments</h4>
+                    {%for comment in blog.blogcomment_set.all%}
+                    <div class="media mb-4">
+                     <!--   <img src="{%static 'JVSafarisMain/img/user.jpg'%}" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;"> -->
+                     
+                     <div class="media-body">
+                            <h6><a href="">{{comment.name}}</a> <small><i>{{comment.date}}</i></small></h6>
+                            <p>{{comment.message}}</p>
+                          <!--  <button class="btn btn-sm btn-outline-primary">Reply</button> -->
+                        </div>
+                     
+
+                    </div>
+                    {%endfor%}
+                  <!--  <div class="media">
+                        <img src="{%static 'JVSafarisMain/img/user.jpg'%}" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
+                        <div class="media-body">
+                            <h6><a href="">John Doe</a> <small><i>01 Jan 2045</i></small></h6>
+                            <p>Diam amet duo labore stet elitr invidunt ea clita ipsum voluptua, tempor labore
+                                accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed sed eirmod ipsum.
+                                Gubergren clita aliquyam consetetur sadipscing, at tempor amet ipsum diam tempor
+                                consetetur at sit.</p>
+                            <button class="btn btn-sm btn-outline-primary">Reply</button>
+                            <div class="media mt-4">
+                                <img src="{%static 'JVSafarisMain/img/user.jpg'%}" alt="Image" class="img-fluid mr-3 mt-1"
+                                    style="width: 45px;">
+                                <div class="media-body">
+                                    <h6><a href="">John Doe</a> <small><i>01 Jan 2045</i></small></h6>
+                                    <p>Diam amet duo labore stet elitr invidunt ea clita ipsum voluptua, tempor
+                                        labore accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed sed
+                                        eirmod ipsum. Gubergren clita aliquyam consetetur sadipscing, at tempor amet
+                                        ipsum diam tempor consetetur at sit.</p>
+                                    <button class="btn btn-sm btn-outline-primary">Reply</button>
+                                </div>
+                            </div>
+                        </div>
+                     
+                    </div> -->
+                </div>
+                <!-- Comment List End -->
+
+                <!-- Comment Form Start -->
+                <div class="bg-white mb-3" style="padding: 30px;">
+                    <h4 class="text-uppercase mb-4" style="letter-spacing: 5px;">Leave a comment</h4>
+                    <form action= '{%url 'JVSBlogs:comment'  blog.id%}' method='post'  >
+                        {%csrf_token%}
+                        <div class="form-group">
+                            <label for="name">Name *</label>
+                            <input name='name' type="text" class="form-control" id="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input name="email" type="email" class="form-control" id="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="website">Phone</label>
+                            <input name="phone" type="text" class="form-control" id="website">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Message *</label>
+                            <textarea name="message" id="message" cols="30" rows="5" class="form-control"></textarea>
+                        </div>
+                        <div class="form-group mb-0">
+                            <input type="submit" value="Leave a comment"
+                                class="btn btn-primary font-weight-semi-bold py-2 px-3">
+                        </div>
+                    </form>
+                </div>
+                <!-- Comment Form End -->
+            </div>
+
+            <div class="col-lg-4 mt-5 mt-lg-0">
+                <!-- Author Bio -->
+                <div class="d-flex flex-column text-center bg-white mb-5 py-5 px-4">
+                    <img src="{{blog.author.image.url}}" class="img-fluid mx-auto mb-3" style="width: 100px;">
+                    <h3 class="text-primary mb-3">{{blog.author.name}}</h3>
+                    <p>{{blog.author.description}}</p>
+                    <div class="d-flex justify-content-center">
+                        {%if blog.author.facebook == ''%}
+                        <div></div>
+
+                        {%else%}
+                        <a class="text-primary px-2" href="{{blog.author.facebook}}">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        {%endif%}
+
+
+                        {%if blog.author.twitter == ''%}
+                        <div></div>
+
+                        {%else%}
+                        <a class="text-primary px-2" href="{{blog.author.twitter}}">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        {%endif%}
+
+                        {%if blog.author.linkedin == ''%}
+                        <div></div>
+
+                        {%else%}
+                        <a class="text-primary px-2" href="{{blog.author.linkedin}}">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        {%endif%}
+
+                        {%if blog.author.instagram == ''%}
+                        <div></div>
+
+                        {%else%}
+                        <a class="text-primary px-2" href="{{blog.author.instagram}}">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        {%endif%}
+
+                        {%if blog.author.youtube == ''%}
+                        <div></div>
+
+                        {%else%}
+                        <a class="text-primary px-2" href="{{blog.author.youtube}}">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        {%endif%}
+                    </div>
+                </div>
+
+                <!-- Search Form -->
+                <div class="mb-5">
+                    <div class="bg-white" style="padding: 30px;">
+                        <div class="input-group">
+                            <input type="text" class="form-control p-4" placeholder="Keyword">
+                            <div class="input-group-append">
+                                <span class="input-group-text bg-primary border-primary text-white"><i
+                                        class="fa fa-search"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Category List -->
+                <div class="mb-5">
+                    <h4 class="text-uppercase mb-4" style="letter-spacing: 5px;">Categories</h4>
+                    <div class="bg-white" style="padding: 30px;">
+                        <ul class="list-inline m-0">
+                            {%for category in categories%}
+                            <li class="mb-3 d-flex justify-content-between align-items-center">
+                                <a class="text-dark" href="{%url 'JVSBlogs:category' category.id%}"><i class="fa fa-angle-right text-primary mr-2"></i>{{category.category}}</a>
+                                <span class="badge badge-primary badge-pill">{{category.blog_set.count}}</span>
+                            </li>
+                            {%endfor%}
+                        
+                          
+                        </ul>
+                    </div>
+                </div>
+                <!-- Recent Post -->
+                <div class="mb-5">
+                    <h4 class="text-uppercase mb-4" style="letter-spacing: 5px;">Recent Post</h4>
+                    {%for blog in recent_blogs%}
+                    <a class="d-flex align-items-center text-decoration-none bg-white mb-3" href="{%url 'JVSBlogs:details' blog.id%}">
+                        <img class="img-fluid" src="{{blog.image.url}}" alt="" style="width: 100px;">
+                        <div class="pl-3">
+                            <h6 class="m-1">{{blog.heading}}</h6>
+                            <small>{{blog.date}}</small>
+                        </div>
+                    </a>
+                    {%endfor%}
+                    
+                    
+                </div>
+
+                <!-- Tag Cloud -->
+                <div class="mb-5">
+                    <h4 class="text-uppercase mb-4" style="letter-spacing: 5px;">Tag Cloud</h4>
+                    <div class="d-flex flex-wrap m-n1">
+                        <a href="" class="btn btn-light m-1">Design</a>
+                        <a href="" class="btn btn-light m-1">Development</a>
+                        <a href="" class="btn btn-light m-1">Marketing</a>
+                        <a href="" class="btn btn-light m-1">SEO</a>
+                        <a href="" class="btn btn-light m-1">Writing</a>
+                        <a href="" class="btn btn-light m-1">Consulting</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Blog End -->
+
+{%endblock%}

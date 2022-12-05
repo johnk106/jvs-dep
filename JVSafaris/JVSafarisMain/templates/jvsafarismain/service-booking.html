@@ -1,0 +1,108 @@
+{%extends 'JVSafarisMain/base.html'%}
+
+{%block head%}
+<title>Booking - {{service.item_description}}</title>
+{%endblock%}
+
+
+{%block pagetitle%}
+{{service.item_description}}
+{%endblock%}
+
+
+{%block subtitle%}
+{{service.item_description}}
+{%endblock%}
+
+
+
+{%block body%}
+<div 
+    style="padding: 10px;background-color:white;border:none;box-shadow:2px 4px 5px grey;margin:2% 2%;">
+    <form action="{%url 'JVS:service-booking' service.id%}" method="post">
+{%csrf_token%}
+        <h5>Please fill the form below to book.</h5>
+
+
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="mb-3">
+                    <label for="fname" class="form-label">First Name</label>
+                    <input name="fname" type="text" class="form-control" id="fname" required>
+                </div>
+
+            </div>
+
+            <div class="col-md-6 col-sm-12">
+                <div class="mb-3">
+                    <label for="lname" class="form-label">Last Name</label>
+                    <input name="lname" type="text" class="form-control" id="lname" required>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="mb-3">
+                    <label for="adults" class="form-label">No of adults</label>
+                    <input name="adults" type="number" class="form-control" id="adults" required>
+                </div>
+
+            </div>
+
+            <div class="col-md-6 col-sm-12">
+                <div class="mb-3">
+                    <label for="kids" class="form-label">No of kids</label>
+                    <input name="kids" type="number" class="form-control" id="kids" required>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="mb-3">
+                    <label for="country" class="form-label">Country</label>
+                    <input name="country" type="text" class="form-control" id="country" required>
+                </div>
+
+            </div>
+
+            <div class="col-md-6 col-sm-12">
+                <div class="mb-3">
+                    <label for="city" class="form-label">city</label>
+                    <input name="city" type="text" class="form-control" id="city" required>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input name="email" type="email" class="form-control" id="email" required>
+                </div>
+
+            </div>
+
+            <div class="col-md-6 col-sm-12">
+                <div class="mb-3">
+                    <label for="phone" class="form-label">Phone number</label>
+                    <input name="phone" type="text" class="form-control" id="phone" required>
+
+                </div>
+            </div>
+
+            
+        
+
+</div>
+<button type="submit" class="btn btn-primary col-md-12">Book</button>
+
+    </form>
+</div>
+
+
+{%endblock%}

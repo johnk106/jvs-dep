@@ -1,0 +1,76 @@
+{%extends 'JVSafarisMain/base.html'%}
+{%load static%}
+
+{%block head%}
+<title>Package - {{package.package_name}}</title>
+{%endblock%}
+
+
+{%block pagetitle%}
+{{package.package_name}}
+{%endblock%}
+
+{%block subtitle%}
+{{package.package_name}}
+{%endblock%}
+
+{%block body%}
+<div class="container" style="padding: 10px;">
+   <div class="row">
+     <div class="col-md-4 col-sm-12">
+        <img src="{{package.image.url}}" style="width: 100%;height:100%;" alt="">
+     </div>
+     <div class="col-md-8 col-sm-6" style="background-color: white;">
+        <h2>{{package.package_name}}</h2>
+        <div class="row">
+            <div class="col-md-4 col-sm-5">
+
+                <p>test</p>
+                <p>test</p>
+                <p>test</p>
+
+            </div>
+            <div class="col-md-6 col-sm-5">
+                <p>test</p>
+                <p>test</p>
+                <p>test</p>
+            </div>
+
+        </div>
+        <a href="{%url 'JVS:booking' package.id%}"><button class="btn btn-primary" style="width: 100%;margin: 5px;">Book Now</button></a>
+
+    </div>
+   </div>
+
+   <div class="row" style="background-color: white;margin: 10px 0 10px 0;padding: 10px;">
+    <div class="col-md-6 col-sm-12" >
+        <h4>Description</h4>
+        <p>
+            {{package.package_desc}}
+        </p>
+    </div>
+
+    <div class="col-md-6 col-sm-12">
+        <div class="row">
+            <div class="col-md-5 col-sm-6">
+                <h6>Inclusives</h6>
+                {%for inclusive in package.packageservice_set.all%}
+                {%if inclusive.is_optional == False%}
+                <p><i style="color: green;" class="fa-solid fa-check"></i> &nbsp;{{inclusive.service}}</p>
+                {%endif%}
+                {%endfor%}
+            </div>
+            <div class="col-md-6 col-sm-5">
+                <h6>Exclusives</h6>
+                {%for exclusive in package.packageservice_set.all%}
+                {%if exclusive.is_optional == True%}
+                <p><i style="color: red;" class="fa-solid fa-xmark"></i> &nbsp;{{exclusive.service}} - ksh {{exclusive.price}}</p>
+                {%endif%}
+                {%endfor%}
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+ 
+{%endblock%}

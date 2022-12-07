@@ -99,13 +99,11 @@ about
                         <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">Mega Offer</h6>
                         <h1 class="text-white"><span class="text-primary">30% OFF</span> For Honeymoon</h1>
                     </div>
-                    <p class="text-white">Invidunt lorem justo sanctus clita. Erat lorem labore ea, justo dolor lorem ipsum ut sed eos,
-                        ipsum et dolor kasd sit ea justo. Erat justo sed sed diam. Ea et erat ut sed diam sea ipsum est
-                        dolor</p>
+                    <p class="text-white">And for the newly weds we celebrate you in a special way.We offer you 30% off on your honeymoon package plus:</p>
                     <ul class="list-inline text-white m-0">
-                        <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Labore eos amet dolor amet diam</li>
-                        <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Etsea et sit dolor amet ipsum</li>
-                        <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Diam dolor diam elitripsum vero.</li>
+                        <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>A gift basket from JV Safaris</li>
+                        <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>A bottle of wine.</li>
+                        <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Specially decorated hotel room courtesy of JV Safaris.</li>
                     </ul>
                 </div>
                 <div class="col-lg-5">
@@ -114,19 +112,22 @@ about
                             <h1 class="text-white m-0">Sign Up Now</h1>
                         </div>
                         <div class="card-body rounded-bottom bg-white p-5">
-                            <form>
+                            <form action="{%url "JVS:index" %} " method = "post">
+                                {%csrf_token%}
                                 <div class="form-group">
-                                    <input type="text" class="form-control p-4" placeholder="Your name" required="required" />
+                                    <input type="text" class="form-control p-4" name="name" placeholder="Your name" required="required" />
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" class="form-control p-4" placeholder="Your email" required="required" />
+                                    <input type="email" class="form-control p-4" name="email" placeholder="Your email" required="required" />
                                 </div>
                                 <div class="form-group">
-                                    <select class="custom-select px-4" style="height: 47px;">
-                                        <option selected>Select a destination</option>
-                                        <option value="1">destination 1</option>
-                                        <option value="2">destination 1</option>
-                                        <option value="3">destination 1</option>
+                                    <input type="text" class="form-control p-4" name="phone" placeholder="Your phone number" required="required" />
+                                </div>
+                                <div class="form-group">
+                                    <select name="destination" class="custom-select px-4" style="height: 47px;">
+                                        {%for destination in destinations%}
+                                        <option value="{{destination.id}}">{{destination.destinantion_name}}</option>
+                                        {%endfor%}
                                     </select>
                                 </div>
                                 <div>

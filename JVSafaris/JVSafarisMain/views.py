@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login,logout
-from .models import Booking, Destination, Package, ServiceBooking, ServiceCategory, ServiceItem,Staff
+from .models import Booking, Destination, Package, ServiceBooking, ServiceCategory, ServiceItem,Staff,Honeymoon
 from django.core.paginator import Paginator
 from blogs.models import *
 from django.contrib.auth.decorators import login_required
@@ -12,6 +12,7 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def index(request):
+
     destinations = Destination.objects.all()
 
     p = Paginator(Package.objects.order_by('id').all(),6)
@@ -22,7 +23,25 @@ def index(request):
 
     e = Paginator(Staff.objects.filter(isEstemeed = True).order_by('id').all(),4)
     estemeed_employees = e.page(1)
+    
+    if request.method == 'POST':
+        name = request.POST['name']
+        email = request.POST['email']
+        phone = request.POST['phone']
+        destination = request.POST['destination']
 
+        new_honeymoon_discount_booking = Honeymoon(name = name,email = email,phone = phone ,destination = Destination.objects.get(pk = destination))
+        new_honeymoon_discount_booking.save()
+        messages.success(request,'We have successfully received your message,an agent will get in touch in due course, Thank you for choosing JVSafaris Travel Agency ')
+
+
+        return render(request,'JVSafarisMain/index.html',{
+        'destinations':destinations,
+        'packages':packages,
+        'blogs':blogs,
+        'staff':estemeed_employees
+        
+    })
     return render(request,'JVSafarisMain/index.html',{
         'destinations':destinations,
         'packages':packages,
@@ -46,7 +65,9 @@ def about(request):
     e = Paginator(Staff.objects.filter(isEstemeed =True).order_by('id').all(),4)
     estemeed_employees = e.page(1)
     return render(request,'JVSafarisMain/about.html',{
-        'staff':estemeed_employees
+        'staff':estemeed_employees,
+        'destinations':Destination.objects.all()
+
     })
 
 def services_Categories(request):

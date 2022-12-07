@@ -139,7 +139,7 @@ PROJECT_ROOT = os.path.normpath(os.path.dirname(__file__))
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-ALLOWED_HOSTS = ['139.59.79.207','*']
+ALLOWED_HOSTS = ['*']
 
 SECURE_CROSS_ORIGIN_OPENER_POLICY = None
 

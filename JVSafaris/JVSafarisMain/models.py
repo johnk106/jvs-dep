@@ -109,3 +109,16 @@ class ServiceBooking(models.Model):
 
     def __str__(self):
         return str(self.fname) + ' ' + str(self.lname)
+
+class Staff(models.Model):
+    name = models.CharField(max_length=255)
+    designation = models.CharField(max_length=255)
+    image = models.ImageField()
+    twitter = models.CharField(max_length = 1000,blank = True)
+    facebook = models.CharField(max_length = 1000,blank=True)
+    instagram = models.CharField(max_length = 1000,blank=True)
+    linkedin = models.CharField(max_length = 1000,blank = True)
+    isEstemeed = models.BooleanField()
+
+    def __str__(self):
+        return str(self.name)

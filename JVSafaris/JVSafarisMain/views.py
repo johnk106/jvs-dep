@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login,logout
-from .models import Booking, Destination, Package, ServiceBooking, ServiceCategory, ServiceItem
+from .models import Booking, Destination, Package, ServiceBooking, ServiceCategory, ServiceItem,Staff
 from django.core.paginator import Paginator
 from blogs.models import *
 from django.contrib.auth.decorators import login_required
@@ -20,10 +20,15 @@ def index(request):
     b = Paginator(Blog.objects.order_by('id').all(),3)
     blogs = b.page(1)
 
+    e = Paginator(Staff.objects.filter(isEstemeed = True).order_by('id').all(),4)
+    estemeed_employees = e.page(1)
+
     return render(request,'JVSafarisMain/index.html',{
         'destinations':destinations,
         'packages':packages,
-        'blogs':blogs
+        'blogs':blogs,
+        'staff':estemeed_employees
+        
     })
 
 
@@ -38,7 +43,11 @@ def package_desc(request,package):
 
 
 def about(request):
-    return render(request,'JVSafarisMain/about.html',{})
+    e = Paginator(Staff.objects.filter(isEstemeed =True).order_by('id').all(),4)
+    estemeed_employees = e.page(1)
+    return render(request,'JVSafarisMain/about.html',{
+        'staff':estemeed_employees
+    })
 
 def services_Categories(request):
     services = ServiceCategory.objects.all()

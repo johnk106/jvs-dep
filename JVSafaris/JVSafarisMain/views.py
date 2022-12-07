@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login,logout
-from .models import Booking, Destination, Package, ServiceBooking, ServiceCategory, ServiceItem,Staff,Honeymoon
+from .models import Booking, Destination, Package, ServiceBooking, ServiceCategory, ServiceItem,Staff,Honeymoon,Contact,Newsletter
 from django.core.paginator import Paginator
 from blogs.models import *
 from django.contrib.auth.decorators import login_required
@@ -84,6 +84,16 @@ def testimonials(request):
 
 
 def contact(request):
+    if request.method == 'POST':
+        name = request.POST['name']
+        email = request.POST['email']
+        subject = request.POST['subject']
+        message = request.POST['message']
+
+        new_message = Contact(name = name,email = email,subject = subject,message = message)
+        new_message.save()
+        messages.success(request,'Your message has been received successfully an agent will get in touch shortly,Thank you for choosing JVSafaris Travel Agency.')
+        return HttpResponseRedirect(reverse('JVS:contact'))
     return render(request,'JVSafarisMain/contact.html',{})
 
 def destinations(request):
@@ -199,3 +209,14 @@ def service_booking(request,id):
 def service_payment(request,id):
     booking = ServiceBooking.objects.get(pk = id)
     return render(request,'JVSafarisMain/service-payment.html',{'booking':booking})
+
+
+def newsletter(request):
+    if request.method == 'POST':
+        email = request.POST['email']
+
+        new = Newsletter(email = email)
+        new.save()
+
+        messages.success(request,'Thank you for subscribing.')
+        return HttpResponseRedirect(reverse('JVS:index'))

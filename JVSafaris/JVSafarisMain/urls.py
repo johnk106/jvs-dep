@@ -30,7 +30,9 @@ urlpatterns = [
     path('auth/login-required/',views.required,name = 'login-required'),
 
 
-    path('service/details/<int:id>',views.service_details,name = 'service-detail')
+    path('service/details/<int:id>',views.service_details,name = 'service-detail'),
+
+    path('newsletter/',views.newsletter,name = 'newsletter')
 
 
 ]

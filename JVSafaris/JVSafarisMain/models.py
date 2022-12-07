@@ -1,5 +1,6 @@
 from email.policy import default
 from django.db import models
+import datetime
 
 # Create your models here.
 class ServiceCategory(models.Model):
@@ -132,3 +133,19 @@ class Honeymoon(models.Model):
 
     def __str__(self):
         return str(self.name)
+
+class Contact(models.Model):
+    name = models.CharField(max_length=255)
+    email = models.CharField(max_length=255)
+    subject = models.CharField(max_length=4200)
+    message = models.CharField(max_length=4200)
+    date = models.DateField(default=datetime.datetime.utcnow())
+
+    def __str__(self):
+        return self.name
+
+class Newsletter(models.Model):
+    email = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.email

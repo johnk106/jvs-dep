@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login,logout
-from .models import Booking, Destination, Package, ServiceBooking, ServiceCategory, ServiceItem,Staff,Honeymoon,Contact,Newsletter
+from .models import *
 from django.core.paginator import Paginator
 from blogs.models import *
 from django.contrib.auth.decorators import login_required
@@ -23,6 +23,9 @@ def index(request):
 
     e = Paginator(Staff.objects.filter(isEstemeed = True).order_by('id').all(),4)
     estemeed_employees = e.page(1)
+
+    t = Paginator(Testimonial.objects.order_by('-id').all(),10)
+    testimonials = t.page(1)
     
     if request.method == 'POST':
         name = request.POST['name']
@@ -39,14 +42,16 @@ def index(request):
         'destinations':destinations,
         'packages':packages,
         'blogs':blogs,
-        'staff':estemeed_employees
+        'staff':estemeed_employees,
+        'testimonials':testimonials
         
     })
     return render(request,'JVSafarisMain/index.html',{
         'destinations':destinations,
         'packages':packages,
         'blogs':blogs,
-        'staff':estemeed_employees
+        'staff':estemeed_employees,
+        'testimonials':testimonials
         
     })
 
@@ -79,7 +84,22 @@ def services(request,id):
     return render(request,'JVSafarisMain/service-categories.html',{'service':service})
 
 def testimonials(request):
-    return render(request,'JVSafarisMain/testimonial.html',{})
+    if request.method == 'POST':
+        name = request.POST['name']
+        comment = request.POST['comment']
+        occupation = request.POST['occupation']
+        image = request.POST['image']
+
+        new_comment = Testimonial(name = name,comment = comment,occupation = occupation,image = image)
+        new_comment.save()
+
+        messages.success(request,'Thank your for your testimonial.')
+        return HttpResponseRedirect(reverse('JVS:testimonials'))
+    t = Paginator(Testimonial.objects.all(),16)
+    testimonial = t.page(1)
+    return render(request,'JVSafarisMain/testimonial.html',{
+        'testimonials':testimonial
+    })
 
 
 

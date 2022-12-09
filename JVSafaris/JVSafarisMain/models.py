@@ -149,3 +149,13 @@ class Newsletter(models.Model):
 
     def __str__(self):
         return self.email
+
+class Testimonial(models.Model):
+    name = models.CharField(max_length = 255)
+    comment = models.CharField(max_length=1200)
+    occupation = models.CharField(max_length = 255)
+    image = models.ImageField()
+
+    def __str__(self):
+        return self.name
+

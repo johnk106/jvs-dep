@@ -134,7 +134,7 @@ Blogs
 
                 <!-- Recent Post -->
                 <div class="mb-5">
-                    <h4 class="text-uppercase mb-4" style="letter-spacing: 5px;">Recent Post</h4>
+                    <h4 class="text-uppercase mb-4" style="letter-spacing: 5px;">Recent Posts</h4>
                     {%for blog in recent_blogs%}
                     <a class="d-flex align-items-center text-decoration-none bg-white mb-3" href="{%url 'JVSBlogs:details' blog.id%}">
                         <img class="img-fluid" src="{{blog.image.url}}" alt="" style="width: 100px;">
@@ -149,7 +149,7 @@ Blogs
                 </div>
 
                 <!-- Tag Cloud -->
-                <div class="mb-5">
+              <!--  <div class="mb-5">
                     <h4 class="text-uppercase mb-4" style="letter-spacing: 5px;">Tag Cloud</h4>
                     <div class="d-flex flex-wrap m-n1">
                         <a href="" class="btn btn-light m-1">Design</a>
@@ -160,6 +160,7 @@ Blogs
                         <a href="" class="btn btn-light m-1">Consulting</a>
                     </div>
                 </div>
+            -->
             </div>
         </div>
     </div>

@@ -59,7 +59,13 @@ def index(request):
 def packages(request):
     packages = Package.objects.all()
     destinations = Destination.objects.all()
-    return render(request,'JVSafarisMain/package.html',{'packages':packages,'destinations':destinations})
+    categories = PackageCategory.objects.all()
+    return render(request,'JVSafarisMain/package.html',{
+        'packages':packages,
+        'destinations':destinations,
+        'package_categories':categories
+
+        })
 
 def package_desc(request,package):
     _package = Package.objects.get(pk = package)

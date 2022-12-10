@@ -50,7 +50,12 @@ class ServiceChargeCharter(models.Model):
     service_charger = models.IntegerField()
     start_date = models.DateField()
     end_date = models.DateField()
+class PackageCategory(models.Model):
+    name = models.CharField(max_length=255)
+    description = models.CharField(max_length=1200)
 
+    def __str__(self):
+        return self.name
 
 
 class Package(models.Model):
@@ -62,6 +67,8 @@ class Package(models.Model):
     destination = models.ForeignKey(Destination,on_delete = models.CASCADE,default = 1)
     duration = models.IntegerField(default = 2)
     population = models.IntegerField(default = 2)
+    category = models.ForeignKey(PackageCategory,on_delete=models.CASCADE)
+
 
     def __str__(self):
         return self.package_name

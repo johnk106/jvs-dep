@@ -9,7 +9,11 @@ urlpatterns = [
     path('packages/description/<package>',views.package_desc,name = 'package-desc'),
     path('services/',views.services_Categories,name = 'services'),
     path('about/',views.about,name = 'about'),
+
     path('testimonials/',views.testimonials,name = 'testimonials'),
+    path('testimonials/new-testimonial',views.new_testimonial_page,name = 'new-testimonial'),
+
+
     path('guides/',views.guide,name='guides'),
     path('contact/',views.contact,name = 'contact'),
     path('about/',views.about,name = 'about'),

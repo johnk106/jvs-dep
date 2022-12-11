@@ -94,7 +94,7 @@ def testimonials(request):
         name = request.POST['name']
         comment = request.POST['comment']
         occupation = request.POST['occupation']
-        image = request.POST['image']
+        image = request.FILES['image']
 
         new_comment = Testimonial(name = name,comment = comment,occupation = occupation,image = image)
         new_comment.save()
@@ -106,7 +106,10 @@ def testimonials(request):
     return render(request,'JVSafarisMain/testimonial.html',{
         'testimonials':testimonial
     })
-
+def new_testimonial_page(request):
+    return render(request,'JVSafarisMain/new-testimonial.html',{
+        'name':'New Testimonial'
+    })
 
 
 def contact(request):

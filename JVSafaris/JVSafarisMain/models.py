@@ -1,5 +1,6 @@
 from email.policy import default
 from django.db import models
+from django.utils import timezone
 import datetime
 
 # Create your models here.
@@ -26,6 +27,12 @@ class ServiceItem(models.Model):
     desc = models.CharField(max_length=4000,default='')
     location = models.CharField(max_length=200,default='')
     image = models.FileField(default = '')
+    start_date = models.DateField(default=timezone.now)
+    end_date = models.DateField(default=timezone.now)
+    duration = models.IntegerField(default=2)
+    adults = models.IntegerField(default=2)
+    kids = models.IntegerField(default=0)
+
 
     def __str__(self):
         return self.item_description
@@ -149,7 +156,7 @@ class Contact(models.Model):
     email = models.CharField(max_length=255)
     subject = models.CharField(max_length=4200)
     message = models.CharField(max_length=4200)
-    date = models.DateField(default=datetime.datetime.utcnow())
+    date = models.DateField(default=timezone.now)
 
     def __str__(self):
         return self.name

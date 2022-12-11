@@ -23,17 +23,17 @@
      <div class="col-md-8 col-sm-6" style="background-color: white;">
         <h2>{{service.item_description}}</h2>
         <div class="row">
-            <div class="col-md-4 col-sm-5">
+            <div class="col-md-5 col-sm-5">
 
                 <p>Cost: <b> Ksh {{service.price}}</b></p>
                 <p>Location: {{service.location}}</p>
-                <p>test</p>
+                <p>Validity:<span style="font-weight: 700;">{{service.start_date}} - {{service.end_date}}</span></p>
 
             </div>
             <div class="col-md-6 col-sm-5">
-                <p>test</p>
-                <p>test</p>
-                <p>test</p>
+                <p>Duration: <b>{{service.duration}} days</b></p>
+                <p>Accommodation: <b>{{service.adults}} adults,{{service.kids}} kids</b></p>
+                <p>Category: <b>{{service.category.category_name}}</b></p>
             </div>
 
         </div>

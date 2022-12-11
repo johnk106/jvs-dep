@@ -83,11 +83,21 @@ def about(request):
 
 def services_Categories(request):
     services = ServiceCategory.objects.all()
-    return render(request,'JVSafarisMain/service.html',{'services':services})
+    t = Paginator(Testimonial.objects.order_by('-id').all(),10)
+    testimonials = t.page(1)
+    return render(request,'JVSafarisMain/service.html',{
+        'services':services,
+        'testimonials':testimonials
+        
+        })
 
 def services(request,id):
     service = ServiceCategory.objects.get(pk = id)
-    return render(request,'JVSafarisMain/service-categories.html',{'service':service})
+
+    
+    return render(request,'JVSafarisMain/service-categories.html',{
+        'service':service
+        })
 
 def testimonials(request):
     if request.method == 'POST':

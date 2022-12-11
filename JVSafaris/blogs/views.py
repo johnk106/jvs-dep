@@ -9,8 +9,10 @@ from urllib.parse import urlencode
 
 # Create your views here.
 def index(request):
-    blogs = Blog.objects.all()
-    c = Paginator(BlogCategory.objects.all(),5)
+    page = request.GET.get('page')
+    b = Paginator(Blog.objects.order_by('-id').all(),8)
+    blogs = b.page(page)
+    c = Paginator(BlogCategory.objects.all(),4)
     categories = c.page(1)
     recent = Paginator(Blog.objects.order_by('id').reverse(),4)
     recent_blogs = recent.page(1)

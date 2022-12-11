@@ -174,8 +174,8 @@
                             </div>
                         </div>
                     -->
-                        <a href="{%url 'JVSBlogs:index'%}" class="nav-item nav-link">Blogs</a>
-                        <a href="{%url 'JVS:contact'%}" class="nav-item nav-link">Contact</a>
+                        <a href="{%url 'JVSBlogs:index'%}?page=1" class="nav-item nav-link">Blogs</a>
+                        <a href="{%url 'JVS:myAccount'%}" class="nav-item nav-link">Account</a>
                     {%if user.is_authenticated%}
                     <a href="{%url 'JVS:logout'%}" class="nav-item nav-link" >Log out</a>
                     {%else%}

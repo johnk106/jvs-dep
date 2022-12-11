@@ -246,3 +246,7 @@ def newsletter(request):
 
         messages.success(request,'Thank you for subscribing.')
         return HttpResponseRedirect(reverse('JVS:index'))
+
+@login_required(login_url='JVS:login-required')
+def myAccount(request):
+    return render(request,'JVSafarisMain/myAccount.html',{})

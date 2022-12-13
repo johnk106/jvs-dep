@@ -23,7 +23,7 @@ class ServiceItem(models.Model):
     service = models.ForeignKey(Service,on_delete=models.CASCADE)
     item_description = models.CharField(max_length=400)
     optional = models.BooleanField()
-    price = models.FloatField(default=0.0)
+   # price = models.FloatField(default=0.0)
     desc = models.CharField(max_length=4000,default='')
     location = models.CharField(max_length=200,default='')
     image = models.FileField(default = '')
@@ -36,6 +36,10 @@ class ServiceItem(models.Model):
 
     def __str__(self):
         return self.item_description
+
+    def price(self):
+        cost = self.servicechargecharter_set.order_by('-id').first()
+        return cost
 
 
 class ServiceItemGallery(models.Model):
@@ -51,12 +55,15 @@ class Destination(models.Model):
    
 
 class ServiceChargeCharter(models.Model):
-    category = models.ForeignKey(ServiceCategory,on_delete=models.CASCADE)
-    service = models.ForeignKey(Service,on_delete=models.CASCADE)
-    service_item = models.ForeignKey(ServiceItem,on_delete=models.CASCADE)
-    service_charger = models.IntegerField()
+    service = models.ForeignKey(ServiceItem,on_delete=models.CASCADE)
+    charge = models.IntegerField()
     start_date = models.DateField()
     end_date = models.DateField()
+
+    def __str__(self):
+        return self.service.item_description
+
+    
 
 
 class PackageCategory(models.Model):
@@ -82,6 +89,21 @@ class Package(models.Model):
 
     def __str__(self):
         return self.package_name
+
+    def price(self):
+        cost = self.packagecharter_set.order_by('-id').first()
+        return cost
+
+class PackageCharter(models.Model):
+    package = models.ForeignKey(Package,on_delete=models.CASCADE)
+    start_date = models.DateField()
+    end_date = models.DateField()
+    charge = models.FloatField()
+
+    def __str__(self):
+        return self.package.package_name
+
+
 
 class PackageService(models.Model):
     service = models.CharField(max_length = 255)

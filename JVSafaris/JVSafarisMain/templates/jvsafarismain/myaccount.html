@@ -14,6 +14,57 @@ My Account
 
 
 {%block content%}
-<h2>My accounts page</h2>
+<div class="row" style="margin: 0.5%;">
+    <div class="col-md-3 col-sm-12" style="border: none;border-radius:10px;background-color: white;padding: 10px;margin: 2% 10px 2% 2%;">
+        <div class="avatar" style="text-align: center;">
+            <img src="https://imgs.search.brave.com/3ZT9rVslOts9nAwdnI8wa84pmRj_M9aUQVWO7YMugdM/rs:fit:474:225:1/g:ce/aHR0cHM6Ly90c2Uy/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5s/Rjh6dGtQeXp2X05y/cEQ3VjhZWVZBSGFI/YSZwaWQ9QXBp" alt="" width="120px" height="120px">
+        </div>
+        <div class="row">
+            <div class="col-md-5 col-sm-5">
+                <b>Name:</b>
+                <p>{{user.first_name}} {{user.last_name}}</p>
+            </div>
+            <div class="col-md-5 col-md-6">
+                <b>Email:</b>
+                <p>{{user.email}}</p>
+            </div>
+        </div>
+
+       <div class="row">
+        <div class="col-md-5">
+            <b>All Trips:</b>
+            <p>25</p>
+        </div>
+        <div class="col-md-5">
+            <b>Commitments:</b>
+            <p>2</p>
+        </div>
+       </div>
+       <hr>
+       <h3>Security</h3>
+       <p>Reset password.</p>
+       <p>Click the button to receive password reset link.</p>
+       <div style="text-align: center;">
+        <button class="btn btn-primary" >Reset password </button>
+       </div>
+       
+    
+    </div>
+    <div class="col-md-8 col-sm-12" style="border: none;border-radius:10px;background-color: white;padding: 10px;margin: 2% 2% 2% 0;">
+        <h2>Your Commitments.</h2>
+        <hr>
+        <div class="alert alert-warning" role="alert">
+           <b>Tip:</b>Commitments are your trips under lipa mdogo mdogo payment plan.
+        </div>
+
+      
+        <h2>Your Trips.</h2>
+        <hr>
+        <div class="alert alert-warning" role="alert">
+            Your attended trips will be displayed here.
+         </div>
+
+    </div>
+</div>
 
 {%endblock%}

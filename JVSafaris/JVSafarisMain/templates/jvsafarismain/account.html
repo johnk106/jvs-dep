@@ -4,18 +4,6 @@
 {%block pagehead%}
 <title>My Account</title>
 {%endblock%}
-<style>
-    ul li{
-        list-style: none;
-        text-align: center;
-    }
-    .list-head{
-        background-color: #7AB730;
-        color: white;
-    }
-    
-
-</style>
 {%endblock%}
 
 {%block pagetitle%}
@@ -32,25 +20,10 @@ My Account
 
 
 {%block body%}
-<div class="row" style="margin: 2%;">
-    <div class="col-md-2 " >
-        <ul style="width: 100%;background-color: white;">
-            <li class="list-head">Menu</li>
-            <li>My Account</li>
-            <hr>
-            <li>My Trips</li>
-            <hr>
-            <li>My Bookings</li>
-        </ul>
-        
 
-    </div>
-    <div class="col-md-9" style="margin: 10px;">
         {%block content%}
 
 
         {%endblock%}
 
-    </div>
-</div>
 {%endblock%}

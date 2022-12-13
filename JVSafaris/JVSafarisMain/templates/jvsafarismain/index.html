@@ -199,7 +199,7 @@
                         <div class="p-3" style="max-width: 900px;">
                             <h4 class="text-white text-uppercase mb-md-3">Tours & Travel</h4>
                             <h1 class="display-3 text-white mb-md-4">Let's Discover The World Together</h1>
-                            <a href="" class="btn btn-primary py-md-3 px-md-5 mt-2">Book Now</a>
+                            <a href="{%url 'JVS:packages'%}" class="btn btn-primary py-md-3 px-md-5 mt-2">Book Now</a>
                         </div>
                     </div>
                 </div>
@@ -209,7 +209,7 @@
                         <div class="p-3" style="max-width: 900px;">
                             <h4 class="text-white text-uppercase mb-md-3">Tours & Travel</h4>
                             <h1 class="display-3 text-white mb-md-4">Discover Amazing Places With Us</h1>
-                            <a href="" class="btn btn-primary py-md-3 px-md-5 mt-2">Book Now</a>
+                            <a href="{%url 'JVS:packages'%}" class="btn btn-primary py-md-3 px-md-5 mt-2">Book Now</a>
                         </div>
                     </div>
                 </div>
@@ -379,11 +379,10 @@
             </div>
             <div class="row">
              
-               {%for package in packages%}
-               
+                {%for package in packages%}
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="package-item bg-white mb-2">
-                        <img class="img-fluid" src="{{package.image.url}}" alt="">
+                       <a href="{%url 'JVS:package-desc' package.id%}"> <img class="img-fluid" src="{{package.image.url}}" alt=""></a>
                         <div class="p-4">
                             <div class="d-flex justify-content-between mb-3">
                                 <small class="m-0"><i class="fa fa-map-marker-alt text-primary mr-2"></i>{{package.destination}}</small>
@@ -393,15 +392,14 @@
                             <a class="h5 text-decoration-none" href="{%url 'JVS:package-desc' package.id%}">{{package.package_name}}</a>
                             <div class="border-top mt-4 pt-4">
                                 <div class="d-flex justify-content-between">
-                                    <h6 class="m-0"><i class="fa fa-star text-primary mr-2"></i>4.5 <small>(250)</small></h6>
-                                    <h5 class="m-0">$350</h5>
+                                    <h6 class="m-0">{{package.destination.destinantion_name}}</h6>
+                                    <h5 class="m-0">Kes {{package.price.charge}}</h5>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                {%endfor%}
+               {%endfor%}
             </div>
         </div>
     </div>

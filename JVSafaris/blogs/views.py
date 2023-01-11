@@ -1,10 +1,11 @@
 from django.shortcuts import render,redirect
+
 from .models import *
+from JVSafarisMain.models import *
 from django.core.paginator import Paginator
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from urllib.parse import urlencode
 
 
 # Create your views here.
@@ -12,22 +13,28 @@ def index(request):
     page = request.GET.get('page')
     b = Paginator(Blog.objects.order_by('-id').all(),8)
     blogs = b.page(page)
-    c = Paginator(BlogCategory.objects.all(),4)
+    c = Paginator(BlogCategory.objects.order_by('id').all(),4)
     categories = c.page(1)
     recent = Paginator(Blog.objects.order_by('id').reverse(),4)
     recent_blogs = recent.page(1)
-    return render(request,'blogs/blog-home.html',{'blogs':blogs,'categories':categories,'recent_blogs':recent_blogs})
+    testimonials = Testimonial.objects.all()
+    return render(request,'blogs/blog-home.html',{
+        'blogs':blogs,
+        'categories':categories,
+        'recent_blogs':recent_blogs,
+        'testimonials':testimonials
+        })
 
 def details(request,id):
     blog = Blog.objects.get(pk = id)
-    c = Paginator(BlogCategory.objects.all(),5)
+    c = Paginator(BlogCategory.objects.order_by('id').all(),5)
     categories = c.page(1)
     recent = Paginator(Blog.objects.order_by('id').reverse(),4)
     recent_blogs = recent.page(1)
     return render(request,'blogs/blog-detail.html',{'blog':blog,'categories':categories,'recent_blogs':recent_blogs})
 
 def category(request,category):
-    c = Paginator(BlogCategory.objects.all(),5)
+    c = Paginator(BlogCategory.objects.order_by('id').all(),5)
     categories = c.page(1)
     recent = Paginator(Blog.objects.order_by('id').reverse(),4)
     recent_blogs = recent.page(1)

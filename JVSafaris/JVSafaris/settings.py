@@ -34,7 +34,7 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY",get_random_secret_key)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = os.getenv("DEBUG","False") == "True"
-DEBUG =  False
+DEBUG =  True
 
 
 
@@ -84,13 +84,25 @@ WSGI_APPLICATION = 'JVSafaris.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': str(BASE_DIR) + '/' + 'db.sqlite3',
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': str(BASE_DIR) + '/' + 'db.sqlite3',
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {   
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME':'jvsdb',
+            'USER': 'jvsdb',
+            'PASSWORD': 'jvsdbadmin',
+            'HOST': 'localhost',
+            'PORT': '',
+        }
+    }
+
 
 
 # Password validation

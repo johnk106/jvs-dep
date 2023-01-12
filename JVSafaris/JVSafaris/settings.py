@@ -96,7 +96,7 @@ else:
         'default': {   
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
             'NAME':'jvsdb',
-            'USER': 'jvsdb',
+            'USER': 'jvsadmin',
             'PASSWORD': 'jvsdbadmin',
             'HOST': 'localhost',
             'PORT': '',

@@ -34,7 +34,7 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY",get_random_secret_key)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = os.getenv("DEBUG","False") == "True"
-DEBUG = True
+DEBUG =  False
 
 
 
@@ -139,7 +139,7 @@ PROJECT_ROOT = os.path.normpath(os.path.dirname(__file__))
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['68.183.82.134']
 
 SECURE_CROSS_ORIGIN_OPENER_POLICY = None
 
